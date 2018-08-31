@@ -10,7 +10,10 @@ const { BlogPosts } = require("./models");
 
 const app = express();
 app.use(express.json());
-
+/*app.use("*", (req, res) => {
+	res.status(404).json({ message: "Not Found"});
+});
+*/
 app.get("/blogs", (req, res) => {
 	BlogPosts.find()
 	.then (blogs => {
@@ -88,9 +91,7 @@ app.delete("/blogs", (req, res) => {
 		.catch(err => res.status(500).json({ message: "Internal server error" }));
 });
 
-app.use("*", function(req, res) => {
-	res.status(404).json({ message: "Not Found"});
-});
+
 
 let server;
 
